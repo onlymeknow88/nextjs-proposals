@@ -2,26 +2,195 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+* {
+  box-sizing: border-box;
+  scrollbar-width: 20;
+}
+
+/* *::-webkit-scrollbar {
+  @apply bg-transparent w-2.5;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-default-500 rounded-full;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+}
+
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+  @apply bg-default-500;
+} */
+
+/* styles/Dropdown.module.css */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  background: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  bottom: 0;
+}
+
+.dropdown.open .dropdown-content {
+  display: block;
+}
+
+.ck-editor-custom
+{
+  /* width: calc(100% - 400px) !important; */
+  margin-top: 14px;
+  width: 100% !important;
+}
+
+
+/* .ck .ck-sticky-panel__content{
+ border-top: 1px solid #a1a1aa !important;
+ border-right: 1px solid #a1a1aa !important;
+ border-left: 1px solid #a1a1aa !important;
+} */
+
+/* .ck.ck-content ul,
+.ck.ck-content ul li {
+  list-style-type: inherit;
+}
+.ck.ck-content ul {
+  padding-left: 40px;
+}
+
+.ck.ck-content ol,
+.ck.ck-content ol li {
+  list-style-type: decimal;
+} */
+.ck.ck-content ol {
+  padding-left: 15px;
+}
+
+.ck.ck-content ul {
+  padding-left: 15px;
+}
+/* .ck-editor__editable_inline {
+  padding: 0 30px !important;
+} */
+.ck .ck-powered-by__label, .ck .ck-powered-by {
+  display: none !important;
+}
+
+.ck.ck-toolbar {
+  background: #f4f4f5 !important;
+}
+
+/* .ck .ck-editor__editable {
+  height: 20rem !important;
+  border: 1px solid #a1a1aa !important;
+} */
+
+/* .ck .ck-editor__editable:focus {
+  border: 1px solid #a1a1aa !important;
+  box-shadow: none !important;
+} */
+
+/* figure .table {
+  background: red !important;
+  height: 1rem !important;
+
+} */
+
+.ck-editor__editable_inline {
+  height: 300px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .ck-editor-custom
+  {
+    width: 100% !important;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #11181C;
+  animation: prixClipFix 2s linear infinite;
+}
+
+.loader::after {
+  border-color: #17c964;
+  animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
+  inset: 6px;
+}
+
+@keyframes rotate {
+  0% {
+      transform: rotate(0deg)
+  }
+
+  100% {
+      transform: rotate(360deg)
+  }
+}
+
+@keyframes prixClipFix {
+  0% {
+      clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+  }
+
+  25% {
+      clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+  }
+
+  50% {
+      clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+  }
+
+  75% {
+      clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+  }
+
+  100% {
+      clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+  }
+}
+
+.center-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
