@@ -29,13 +29,35 @@ const NewTable = (props: any) => {
     onDeleteModal,
   } = props;
 
-  console.log(formNops)
   const handleDelete = useCallback(
     async (id: any) => {
       await onDeleteModal(id);
     },
     [onDeleteModal]
   );
+
+  const handleClick = useCallback(async (id:any) => {
+    try {
+      const res = await downloadFormNop(id,users.isLogin,users.role);
+      const base64EncodedPdf = res.data.pdf;
+      const filename = res.data.filename;
+
+      const pdfBlob = new Blob([Buffer.from(base64EncodedPdf, "base64")], {
+        type: "application/pdf",
+      });
+
+      // Create a link to trigger the download
+      const downloadLink = document.createElement("a");
+      downloadLink.href = window.URL.createObjectURL(pdfBlob);
+      downloadLink.target = "_blank"; // Open the link in a new tab
+      downloadLink.download = filename; // Use the filename from the response
+
+      // Trigger the download by simulating click
+      downloadLink.click();
+    } catch (error) {
+      console.log(error);
+    }
+  },[users])
 
   const renderCell = useCallback(
     (formNop: any, columnKey: any) => {
@@ -56,11 +78,14 @@ const NewTable = (props: any) => {
                 <div>
                   <Button
                     className="bg-transparent text-md"
-                    as={Link}
+                    // as={Link}
                     startContent={<DownloadIcon size={20} fill="#17C964" />}
                     size="sm"
-                    target="_blank"
-                    href={`http://p-api.test/form-nop/pdf?id=${formNop.nop_id}&isLogin=${users.isLogin}&role=${users.role}`}
+                    onClick={()=> {
+                      handleClick(formNop.nop_id)
+                    }}
+                    // target="_blank"
+                    // href={`http://p-api.test/form-nop/pdf?id=${formNop.nop_id}&isLogin=${users.isLogin}&role=${users.role}`}
                   >
                     Print
                   </Button>
@@ -93,7 +118,7 @@ const NewTable = (props: any) => {
           return cellValue;
       }
     },
-    [users]
+    [handleClick]
   );
   return (
     <Table

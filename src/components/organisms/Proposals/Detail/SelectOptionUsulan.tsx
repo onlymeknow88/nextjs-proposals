@@ -45,7 +45,6 @@ export const SelectOptionUsulan = ({
               onChange={(event) => {
                 const numericValue =
                   parseFloat(event.target.value.replace(/[^\d]/g, '')) || 0;
-                // Assuming you have a function to handle input changes, such as onInputValue
                 onInputValue({ key:'dana',value: numericValue });
               }}
               className="flex"

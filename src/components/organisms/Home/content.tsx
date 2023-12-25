@@ -63,7 +63,6 @@ export const Content = (authToken: any) => {
   const fetchDashboard = useCallback(async () => {
     setLoading(true);
 
-
     const res = await getDashboard(authToken.token, "");
 
     const data = res.data.result;
@@ -93,33 +92,33 @@ export const Content = (authToken: any) => {
     setYear(data);
   }, [authToken]);
 
-  const handleSelectYear = useCallback(async(ctx:any) => {
-    setLoading(true);
+  const handleSelectYear = useCallback(
+    async (ctx: any) => {
+      setLoading(true);
 
+      const res = await getDashboard(authToken.token, ctx);
 
-    const res = await getDashboard(authToken.token, ctx);
+      const data = res.data.result;
 
-    const data = res.data.result;
+      console.log(data);
 
-    console.log(data);
+      setAmount(data.amount);
+      // Mura Budget
+      // setDataTotalBudgetMura(data.budget.budgetMura);
+      // setDataSisaBudgetMura(data.budget.budgetMura);
 
-    setAmount(data.amount);
-    // Mura Budget
-    // setDataTotalBudgetMura(data.budget.budgetMura);
-    // setDataSisaBudgetMura(data.budget.budgetMura);
+      setSkalaPrioritasHigh(data.skalaPrioritas.high);
+      setSkalaPrioritasMedium(data.skalaPrioritas.medium);
+      setSkalaPrioritasLow(data.skalaPrioritas.low);
 
-    setSkalaPrioritasHigh(data.skalaPrioritas.high);
-    setSkalaPrioritasMedium(data.skalaPrioritas.medium);
-    setSkalaPrioritasLow(data.skalaPrioritas.low);
+      setStatusProposal(data.status);
 
-    setStatusProposal(data.status);
+      setHistoryProposal(data.historyProposal);
 
-    setHistoryProposal(data.historyProposal);
-
-    setLoading(false);
-  },[authToken])
-
-  
+      setLoading(false);
+    },
+    [authToken]
+  );
 
   const topContentBudget = useMemo(() => {
     return (
@@ -187,8 +186,8 @@ export const Content = (authToken: any) => {
                       trigger: "h-[40px] bg-white",
                       value: "text-default-700",
                     }}
-                    onChange={(e:any) => {
-                      handleSelectYear(e.target.value)
+                    onChange={(e: any) => {
+                      handleSelectYear(e.target.value);
                     }}
                   >
                     {year.map((item: any) => (
@@ -247,7 +246,9 @@ export const Content = (authToken: any) => {
                           <TableCell>{item.CcowName}</TableCell>
                           <TableCell>{item.GLAccount}</TableCell>
                           <TableCell>{formatRupiah(item.amount)}</TableCell>
-                          <TableCell>{formatRupiah(item.sisa_amount)}</TableCell>
+                          <TableCell>
+                            {formatRupiah(item.sisa_amount)}
+                          </TableCell>
                           <TableCell>{item.year}</TableCell>
                         </TableRow>
                       )}
@@ -559,7 +560,7 @@ function SkeletonSkalaSection({
   return (
     <>
       {items.map((item) => (
-          <SkeletonSkala key={item}/>
+        <SkeletonSkala key={item} />
       ))}
     </>
   );
@@ -572,7 +573,7 @@ function SkeletonBudgetSection({
   return (
     <>
       {items.map((item) => (
-          <SkeletonBudget key={item}/>
+        <SkeletonBudget key={item} />
       ))}
     </>
   );

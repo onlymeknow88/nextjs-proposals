@@ -43,7 +43,6 @@ const FormPurpay = (props: PurpayProps) => {
     }
   };
 
-
   return (
     <>
       {" "}

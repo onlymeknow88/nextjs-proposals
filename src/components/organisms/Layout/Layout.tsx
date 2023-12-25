@@ -4,7 +4,6 @@ import { SidebarProvider } from "./LayoutContext";
 import { Navbar } from "../Navbar";
 import { SidebarWrapper } from "../Sidebar";
 import { NextApiRequest } from "next";
-import { CategoryPills } from "./Category";
 
 
 interface Props {

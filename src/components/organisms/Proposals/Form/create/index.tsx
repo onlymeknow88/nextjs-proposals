@@ -56,7 +56,7 @@ interface ProposalStateTypes {
   jenis_bantuan: string;
   ccow_id: any;
   upload_file: any;
-  checklist_dokumen: any
+  checklist_dokumen: any;
 }
 interface ProposalProps {
   tokens: string;
@@ -84,7 +84,7 @@ export const FormProposal = (props: ProposalProps) => {
     jenis_bantuan: "",
     ccow_id: "",
     upload_file: [],
-    checklist_dokumen: []
+    checklist_dokumen: [],
   };
 
   const [value, setValue] = useState({
@@ -275,14 +275,6 @@ export const FormProposal = (props: ProposalProps) => {
   }, [tokens]);
 
   const [optBudget, setOptBudget] = useState<any>([]);
-  const [emptyBudget, setEmptyBudget] = useState(false);
-
-  // const fetchSelect2Budget = useCallback(async () => {
-  //   const res = await getSelect2Budget(tokens, "");
-  //   console.log(res);
-  //   const data = await res.data.result;
-  //   setOptBudget(data);
-  // }, [tokens,]);
 
   const handleCcowSelect = async (event: any) => {
     setLoading(true);
@@ -605,24 +597,6 @@ export const FormProposal = (props: ProposalProps) => {
                     input: "w-[100%] resize-y min-h-[40px]",
                   }}
                 />
-                {/* <CKEditor
-                  error={error}
-                  label="Deksripsi Permohonan"
-                  name="description"
-                  value={proposal.deskripsi}
-                  onChange={(event: any) => {
-                    return setProposal({
-                      ...proposal,
-                      deskripsi: event,
-                    });
-                  }}
-                >
-                  {error && (
-                    <span className="text-tiny text-red-500">
-                      {validation.deskripsi}
-                    </span>
-                  )}
-                </CKEditor> */}
               </div>
               <div className="flex flex-col lg:w-[550px] md:flex-row gap-4">
                 <SelectComponent
@@ -744,47 +718,22 @@ export const FormProposal = (props: ProposalProps) => {
                 </label>
                 <div className="flex flex-col">
                   {checkDokumen.map((item: any, index: any) => (
-                    <>
-                      {/* <input
-                        id={`check-${item.uid}`}
-                        type="checkbox"
-                        // @ts-ignore
-                        checked={checkedState[item.uid] || false}
-                        onChange={() => handleCheck(item.uid)}
-                        // onChange={handleCheck}
-                        value={item.uid}
-                        // checked={checkedState.includes(item.uid)}
-                      />
-                      <label htmlFor={`check-${item.uid}`}>{item.name}</label> */}
-                      <Checkbox
-                        key={index}
-                        radius="sm"
-                        color="primary"
-                        className="mb-1"
-                        classNames={{
-                          label: "text-sm",
-                        }}
-                        value={item.uid}
-                        // @ts-ignore
-                        isSelected={checkedState[item.uid] || false}
-                        onChange={() => handleCheck(item.uid)}
-                      >
-                        {item.name}
-                      </Checkbox>
-                    </>
+                    <Checkbox
+                      key={index}
+                      radius="sm"
+                      color="primary"
+                      className="mb-1"
+                      classNames={{
+                        label: "text-sm",
+                      }}
+                      value={item.uid}
+                      // @ts-ignore
+                      isSelected={checkedState[item.uid] || false}
+                      onChange={() => handleCheck(item.uid)}
+                    >
+                      {item.name}
+                    </Checkbox>
                   ))}
-
-                  {/* <Checkbox
-                    radius="sm"
-                    color="primary"
-                    classNames={{
-                      label: "text-sm",
-                    }}
-                    checked={isChecked}
-                    onChange={handleCheckedBoxDokumen}
-                  >
-                    Surat Penunjukan Rekening
-                  </Checkbox> */}
                 </div>
               </div>
               <div className="flex justify-start flex-col lg:flex-row md:flex-row gap-3">

@@ -36,7 +36,6 @@ export const ButtonReturn = ({ proposals, users, tokens }: any) => {
     setLoading(true);
 
     // Perform noted for return action
-
     const res = await returnProposalById(proposal, proposals.id, tokens);
 
     // Reset loading state

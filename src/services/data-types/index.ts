@@ -28,6 +28,9 @@ export interface ProposalTypes {
   hasNameStatus: string;
   budget: BudgetsTypes;
   checklist_dokumen: any;
+  sts_appr_deptHead: any;
+  sts_appr_divHead: any;
+  sts_appr_director: any;
 }
 
 export interface BudgetsTypes {

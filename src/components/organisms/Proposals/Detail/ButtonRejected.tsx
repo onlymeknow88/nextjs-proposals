@@ -38,7 +38,6 @@ export const ButtonRejected = ({ proposals, users, tokens }: any) => {
       "rejected",
       tokens
     );
-    // console.log(res.data);
 
     // Reset loading state
     setLoading(false);

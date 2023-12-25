@@ -118,6 +118,7 @@ const ProposalContent = ({ tokens }: any) => {
     setLastPage(data.last_page);
     setProposals(data.data);
   }, []);
+  
   //status change
   const onSkalaPrioritasChange = useCallback(async (value: string) => {
     const response = await getProposal(value, "skala_prioritas");
@@ -268,7 +269,6 @@ const ProposalContent = ({ tokens }: any) => {
       <div className="pl-4 pr-6 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold">All Proposal</h3>
-          {/* <TableNew tokens={tokens} /> */}
           <div className="flex lg:items-center lg:justify-between w-full flex-col lg:flex-row md:flex-row md:items-center gap-4">
             <Button
               className="lg:text-sm text-lg h-[50px] lg:h-[34px] md:h-[34px] md:text-sm text-white"
@@ -289,7 +289,6 @@ const ProposalContent = ({ tokens }: any) => {
                   trigger: "border-1 border-gray-200 h-[38px] bg-white",
                   value: "text-default-700",
                 }}
-                // selectedKeys={[`${selectedKeysSkalaPrioritas}`]}
                 onChange={(event: any) => {
                   onSkalaPrioritasChange(event.target.value);
                 }}
@@ -312,7 +311,6 @@ const ProposalContent = ({ tokens }: any) => {
                   trigger: "border-1 border-gray-200 h-[38px] bg-white",
                   value: "text-default-700",
                 }}
-                // selectedKeys={[`${selectedKeysSkalaPrioritas}`]}
                 onChange={(event: any) => {
                   onStatusChange(event.target.value);
                 }}
@@ -335,7 +333,6 @@ const ProposalContent = ({ tokens }: any) => {
                   trigger: "border-1 border-gray-200 h-[38px] bg-white",
                   value: "text-default-700",
                 }}
-                // selectedKeys={[`${selectedKeysSkalaPrioritas}`]}
                 onChange={(event: any) => {
                   // console.log(event.target.value)
                   onAreaChange(event.target.value);

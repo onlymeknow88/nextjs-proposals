@@ -37,6 +37,8 @@ import { getSelect2Budget } from "@/services/budget";
 import { getSelect2Ccow } from "@/services/ccow";
 import { getSelect2Area } from "@/services/area";
 import NextLink from "next/link";
+import { getFormNopByPropId } from "@/services/form-nop";
+import FormUseInternal from "./FormUseInternal";
 
 interface ProposalStateTypes {
   emp_name: string;
@@ -56,11 +58,13 @@ interface ProposalStateTypes {
   has_file: any;
   ccow_id: string;
   checklist_dokumen: any;
+  sts_appr_deptHead: any;
+  sts_appr_divHead: any;
+  sts_appr_director: any;
 }
 
 interface ProposalProps {
   proposalBase64: ProposalTypes;
-  // areas: AreaTypes;
   users: UserTypes;
   tokens: string;
 }
@@ -88,6 +92,9 @@ export const DetailsProposal = (props: ProposalProps) => {
     upload_file: proposals.has_file,
     has_file: proposals.has_file,
     checklist_dokumen: proposals.checklist_dokumen,
+    sts_appr_deptHead: proposals.sts_appr_deptHead,
+    sts_appr_divHead: proposals.sts_appr_divHead,
+    sts_appr_director: proposals.sts_appr_director,
   });
 
   const router = useRouter();
@@ -110,11 +117,12 @@ export const DetailsProposal = (props: ProposalProps) => {
     upload_file: [],
     has_file: [],
     checklist_dokumen: [],
+    sts_appr_deptHead: "",
+    sts_appr_divHead: "",
+    sts_appr_director: "",
   });
   const [error, setError] = useState(false);
   const [isLoading, setisLoading] = useState(false);
-
-  const [isPosition, setIsPosition] = useState(false);
 
   const handleInputValueJmlDana = (option: any) => {
     setProposal({
@@ -179,15 +187,15 @@ export const DetailsProposal = (props: ProposalProps) => {
   const [optBudget, setOptBudget] = useState([]);
 
   const fetchSelect2Budget = useCallback(async () => {
-    setisLoading(true)
+    setisLoading(true);
     const res = await getSelect2Budget(tokens, "");
     const data = await res.data.result;
     setOptBudget(data);
-    setisLoading(false)
+    setisLoading(false);
   }, [tokens]);
 
   const handleCcowSelect = async (event: any) => {
-    setisLoading(true)
+    setisLoading(true);
     if (!event) {
       const res = await getSelect2Ccow(tokens);
       const data = await res.data.result;
@@ -199,21 +207,23 @@ export const DetailsProposal = (props: ProposalProps) => {
     const res = await getSelect2Budget(tokens, event);
     const data = await res.data.result;
     setOptBudget(data);
-    setisLoading(false)
+    setisLoading(false);
   };
 
+  
+
   useEffect(() => {
-    fetchSelect2Ccow();
-    fetchSelect2Budget();
     fetchSelect2Area();
+    fetchSelect2Budget();
+    fetchSelect2Ccow();
   }, [fetchSelect2Ccow, fetchSelect2Budget, fetchSelect2Area]);
 
   return (
     <>
       {" "}
-      <div className="flex justify-between gap-3 items-end">
+      <div className="flex flex-col lg:flex-row justify-between gap-3 lg:items-end">
         <Button
-          className="text-lg h-[40px] lg:h-[34px] lg:text-sm bg-default-200 md:h-[34px] md:text-sm"
+          className="text-lg h-[40px] w-[100px] lg:w-[90px] lg:h-[34px] lg:text-sm bg-default-200 md:h-[34px] md:text-sm"
           size="sm"
           href={"/proposal"}
           as={NextLink}
@@ -222,7 +232,10 @@ export const DetailsProposal = (props: ProposalProps) => {
           Back
         </Button>
 
-        <FormNoi proposals={proposal} tokens={tokens} />
+        <div className={`flex flex-row gap-4`}>
+          <FormNoi proposals={proposal} tokens={tokens} />
+          <FormUseInternal proposals={proposal} />
+        </div>
       </div>
       <div className="max-w-[90rem]">
         <form action="">
@@ -555,7 +568,6 @@ export const DetailsProposal = (props: ProposalProps) => {
                 </label>
                 <div className="flex flex-col">
                   {checkDokumen.map((item: any, index: any) => (
-                    <>
                       <Checkbox
                         key={index}
                         radius="sm"
@@ -571,7 +583,6 @@ export const DetailsProposal = (props: ProposalProps) => {
                       >
                         {item.name}
                       </Checkbox>
-                    </>
                   ))}
                 </div>
               </div>

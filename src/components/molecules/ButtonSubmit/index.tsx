@@ -57,6 +57,7 @@ import {
                           isDisabled
                           color="danger"
                           variant="solid"
+                          radius="sm"
                           spinner={
                             <svg
                               className="animate-spin h-5 w-5 text-current"

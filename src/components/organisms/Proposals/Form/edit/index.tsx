@@ -64,7 +64,6 @@ interface ProposalStateTypes {
 
 interface ProposalProps {
   proposalBase64: ProposalTypes;
-  // areas: AreaTypes;
   users: UserTypes;
   tokens: string;
 }
@@ -170,7 +169,6 @@ export const FormProposal = (props: ProposalProps) => {
     });
   };
 
-
   const handleSubmit = async () => {
     const data = new FormData();
     data.append("emp_name", proposal.emp_name);
@@ -234,8 +232,6 @@ export const FormProposal = (props: ProposalProps) => {
         formData.append(`has_file_${index}`, file.id);
       });
 
-      // if (proposals.has_file.length > 0) {
-
       const response = await UploadFile(formData);
       if (response.error) {
         MySwal.fire({
@@ -251,10 +247,6 @@ export const FormProposal = (props: ProposalProps) => {
             toast.addEventListener("mouseenter", Swal.stopTimer);
             toast.addEventListener("mouseleave", Swal.resumeTimer);
           },
-          // didOpen: (toast) => {
-          //   toast.addEventListener('mouseenter', Swal.stopTimer)
-          //   toast.addEventListener('mouseleave', Swal.resumeTimer)
-          // }
         });
         setMessage(response.message);
         setFileError(true);
@@ -273,15 +265,9 @@ export const FormProposal = (props: ProposalProps) => {
             toast.addEventListener("mouseenter", Swal.stopTimer);
             toast.addEventListener("mouseleave", Swal.resumeTimer);
           },
-          // didOpen: (toast) => {
-          //   toast.addEventListener('mouseenter', Swal.stopTimer)
-          //   toast.addEventListener('mouseleave', Swal.resumeTimer)
-          // }
         });
         setFileError(false);
       }
-
-      // }
 
       setProposal({
         ...proposal,
@@ -371,11 +357,6 @@ export const FormProposal = (props: ProposalProps) => {
     setEditorLoaded(true);
     fetchSelect2Ccow();
     fetchSelect2Budget();
-
-    // setProposal({
-    //   ...proposal,
-    //   checklist_dokumen: checkedItems
-    // })
   }, [fetchSelect2Ccow, fetchSelect2Budget]);
 
   const handleDate = async (ctx: any) => {
@@ -399,8 +380,6 @@ export const FormProposal = (props: ProposalProps) => {
         >
           Back
         </Button>
-
-        {/* <Button as={Link} href={`/proposas/formNoi/${proposals.id}`}>Form Noi</Button> */}
       </div>
       <div className="max-w-[90rem]">
         <form action="">
@@ -808,47 +787,22 @@ export const FormProposal = (props: ProposalProps) => {
                 </label>
                 <div className="flex flex-col">
                   {checkDokumen.map((item: any, index: any) => (
-                    <>
-                      {/* <input
-                        id={`check-${item.uid}`}
-                        type="checkbox"
-                        // @ts-ignore
-                        checked={checkedState[item.uid] || false}
-                        onChange={() => handleCheck(item.uid)}
-                        // onChange={handleCheck}
-                        value={item.uid}
-                        // checked={checkedState.includes(item.uid)}
-                      />
-                      <label htmlFor={`check-${item.uid}`}>{item.name}</label> */}
-                      <Checkbox
-                        key={index}
-                        radius="sm"
-                        color="primary"
-                        className="mb-1"
-                        classNames={{
-                          label: "text-sm",
-                        }}
-                        value={item.uid}
-                        // @ts-ignore
-                        isSelected={checkedState[item.uid] || false}
-                        onChange={() => handleCheck(item.uid)}
-                      >
-                        {item.name}
-                      </Checkbox>
-                    </>
+                    <Checkbox
+                      key={index}
+                      radius="sm"
+                      color="primary"
+                      className="mb-1"
+                      classNames={{
+                        label: "text-sm",
+                      }}
+                      value={item.uid}
+                      // @ts-ignore
+                      isSelected={checkedState[item.uid] || false}
+                      onChange={() => handleCheck(item.uid)}
+                    >
+                      {item.name}
+                    </Checkbox>
                   ))}
-
-                  {/* <Checkbox
-                    radius="sm"
-                    color="primary"
-                    classNames={{
-                      label: "text-sm",
-                    }}
-                    checked={isChecked}
-                    onChange={handleCheckedBoxDokumen}
-                  >
-                    Surat Penunjukan Rekening
-                  </Checkbox> */}
                 </div>
               </div>
               <div className="flex justify-start flex-col lg:flex-row md:flex-row gap-3">

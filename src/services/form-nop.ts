@@ -43,6 +43,17 @@ export async function getFormNopById(id: any, token: string) {
   });
 }
 
+export async function getFormNopByPropId(id: any, token: string) {
+  let params = `?prop_id=${id}`;
+  const url = `${ROOT_API}/${API_VERSION}/form-nop${params}`;
+
+  return callAPI({
+    url,
+    method: "GET",
+    serverToken: token,
+  });
+}
+
 export async function storeFormNop(formNop: any, token: string) {
   const url = `${ROOT_API}/${API_VERSION}/form-nop`;
 
@@ -86,8 +97,8 @@ export async function getSelect2FormNop(token: string,id: string) {
   });
 }
 
-export async function downloadFormNop(id: string) {
-  let params = `?id=${id}`;
+export async function downloadFormNop(id: string, isLogin: string,role:string) {
+  let params = `?id=${id}&isLogin=${isLogin}&role=${role}`;
   const url = `${ROOT_API}/${API_VERSION}/form-nop/pdf${params}`;
 
   return callAPI({

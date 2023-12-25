@@ -246,3 +246,15 @@ export async function UploadFile(image: FormData) {
     token: true,
   });
 }
+
+export async function internalMemoPDF(data: any)
+{
+  const url = `${ROOT_API}/${API_VERSION}/proposal/toPDF`;
+
+  return callAPI({
+    url,
+    method: "POST",
+    data: data,
+    token: true
+  })
+}

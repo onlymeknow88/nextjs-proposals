@@ -90,7 +90,6 @@ const FormAmount = (props: AmountProps) => {
                   size="sm"
                   placeholder="Pilih"
                   defaultItems={optGlAcc}
-                  // selectedKey={`${budget.ccow_id}`}
                   onSelectionChange={(event: any) => {
                     setError(false);
                     return setAmount({

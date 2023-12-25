@@ -67,7 +67,6 @@ const NewTable = (props: any) => {
               className={`capitalize ${
                 statusColorMap[proposal.skala_prioritas]
               }`}
-              // color={statusColorMap[proposal.skala_prioritas]}
               size="sm"
             >
               {cellValue}
