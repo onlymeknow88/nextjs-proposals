@@ -258,3 +258,14 @@ export async function internalMemoPDF(data: any)
     token: true
   })
 }
+
+export async function downloadPDF(id:string)
+{
+  const url = `${ROOT_API}/${API_VERSION}/proposal/${id}/downloadPDF`;
+
+  return callAPI({
+    url,
+    method: "GET",
+    token: true
+  })
+}

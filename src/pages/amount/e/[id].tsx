@@ -54,7 +54,7 @@ interface GetServerSideProps {
 const CreateAmounts = ({ tokens,amounts, users }: AmountProps) => {
   return (
     <>
-      <div className="flex flex-row pr-8 pl-4 lg:px-8 py-8 items-center w-full justify-between">
+      <div className="flex flex-row pl-1 pr-4 lg:px-8 py-8 items-center w-full justify-between">
         <BreadCumbCustom
           label="Dashboard"
           labelPage="Amounts"
@@ -62,7 +62,7 @@ const CreateAmounts = ({ tokens,amounts, users }: AmountProps) => {
           iconHome={<HouseIcon />}
         />
       </div>
-      <div className="pr-8 pl-4 lg:px-8 w-full max-w-full h-screen max-h-full">
+      <div className="pl-1 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold"></h3>
 

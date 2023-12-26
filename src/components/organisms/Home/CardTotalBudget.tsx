@@ -21,7 +21,7 @@ const CardTotalBudget = (Props: CardTotalBudgetProps) => {
             {/* <span className="text-[1.2rem] font-medium text-blue-500">2024</span> */}
         </div>
         <div className="flex gap-2.5 py-6 items-center">
-          <span className=" text-2xl font-semibold text-red-500">{formatRupiah(data.total_budget || 0)}</span>
+          <span className=" text-2xl font-semibold text-danger-500">{formatRupiah(data.total_budget || 0)}</span>
         </div>
         <div className="flex items-center gap-6">
           <div>

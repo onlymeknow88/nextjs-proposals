@@ -24,11 +24,11 @@ export const SelectOptionUsulan = ({
       <div className={`flex flex-col lg:w-[550px] md:flex-row gap-4 ${valueJenisBantuan === 'dana' || valueJenisBantuan === 'material' ? "" : "lg:hidden hidden"}`}>
         <label
           className={`${
-            error === true ? "text-red-500" : ""
+            error === true ? "text-danger-500" : ""
           } text-sm lg:w-[25rem] font-medium`}
         >
           Jumlah bantuan yang <br />
-          diusulkan <span className="text-red-500">*</span>
+          diusulkan <span className="text-danger-500">*</span>
         </label>
             <Input
               isInvalid={error ? true : false}

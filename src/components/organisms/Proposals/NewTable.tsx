@@ -120,8 +120,8 @@ const NewTable = (props: any) => {
             } ${column.uid == "status" ? "!text-center" : ""}  ${
               column.uid == "skala_prioritas" ? "!text-center" : ""
             }
-              ${column.uid == "no_reg" ? "w-[10rem] !text-center" : ""}
-              ${column.uid == "judul_proposal" ? "!text-center" : ""}
+              ${column.uid == "prop_no" ? "lg:w-[10rem] !text-center" : ""}
+              ${column.uid == "judul" ? "!text-center" : ""}
               `}
           >
             {column.name}

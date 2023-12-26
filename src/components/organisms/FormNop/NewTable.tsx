@@ -78,14 +78,11 @@ const NewTable = (props: any) => {
                 <div>
                   <Button
                     className="bg-transparent text-md"
-                    // as={Link}
                     startContent={<DownloadIcon size={20} fill="#17C964" />}
                     size="sm"
                     onClick={()=> {
                       handleClick(formNop.nop_id)
                     }}
-                    // target="_blank"
-                    // href={`http://p-api.test/form-nop/pdf?id=${formNop.nop_id}&isLogin=${users.isLogin}&role=${users.role}`}
                   >
                     Print
                   </Button>

@@ -20,6 +20,7 @@ import {
 import {
   areaOptions,
   checkDokumen,
+  downloadPDF,
   skalaPrioritasSelect,
 } from "@/services/proposal";
 import { SelectOptionUsulan } from "./SelectOptionUsulan";
@@ -39,6 +40,7 @@ import { getSelect2Area } from "@/services/area";
 import NextLink from "next/link";
 import { getFormNopByPropId } from "@/services/form-nop";
 import FormUseInternal from "./FormUseInternal";
+import axios from "axios";
 
 interface ProposalStateTypes {
   emp_name: string;
@@ -210,7 +212,32 @@ export const DetailsProposal = (props: ProposalProps) => {
     setisLoading(false);
   };
 
-  
+  const handleDownloadPDF = useCallback(
+    async (file: any) => {
+      try {
+        const response = await axios.get(
+          `http://p-api.test/api/proposal/${file.id}/downloadPDF`,
+          {
+            responseType: "arraybuffer",
+            headers: {
+              Authorization: `Bearer ${tokens}`,
+            },
+          }
+        );
+
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const url = window.URL.createObjectURL(blob);
+        const filename = `${file.name}.${file.file_type}`;
+        window.open(url,'', "_blank");
+      //   if(myWindow) { 
+      //     myWindow?.document.write(`<title>${filename}</title><iframe src="${url}" style="padding:0 !important" width="100%" height="100%"></iframe>`);
+      // } 
+      } catch (error) {
+        console.error("Error downloading PDF", error);
+      }
+    },
+    [tokens]
+  );
 
   useEffect(() => {
     fetchSelect2Area();
@@ -223,7 +250,7 @@ export const DetailsProposal = (props: ProposalProps) => {
       {" "}
       <div className="flex flex-col lg:flex-row justify-between gap-3 lg:items-end">
         <Button
-          className="text-lg h-[40px] w-[100px] lg:w-[90px] lg:h-[34px] lg:text-sm bg-default-200 md:h-[34px] md:text-sm"
+          className="text-lg h-[40px] w-[100px] lg:w-[80px] lg:h-[34px] lg:text-sm bg-default-200 md:h-[34px] md:text-sm"
           size="sm"
           href={"/proposal"}
           as={NextLink}
@@ -522,7 +549,7 @@ export const DetailsProposal = (props: ProposalProps) => {
                   value={proposal.ass_proposal}
                 >
                   {error && (
-                    <span className="text-tiny text-red-500">
+                    <span className="text-tiny text-danger-500">
                       {validation.ass_proposal}
                     </span>
                   )}
@@ -539,7 +566,13 @@ export const DetailsProposal = (props: ProposalProps) => {
                         key={key}
                         className="flex w-full justify-between items-center border-b-1 border-default-300 pb-2"
                       >
-                        <Link href="/" className="text-sm">
+                        <Link
+                          href="#"
+                          onClick={() => {
+                            handleDownloadPDF(file);
+                          }}
+                          className="text-sm"
+                        >
                           {file.name}
                         </Link>
                         {/* <Button
@@ -561,28 +594,29 @@ export const DetailsProposal = (props: ProposalProps) => {
               <div className="flex flex-col lg:w-[550px] md:w-[550px] md:flex-row gap-4">
                 <label
                   className={`${
-                    error === true ? "text-red-500" : ""
+                    error === true ? "text-danger-500" : ""
                   } text-sm md:w-[17rem] lg:w-[15rem] font-medium`}
                 >
                   Kelengkapan Chekclist
                 </label>
                 <div className="flex flex-col">
                   {checkDokumen.map((item: any, index: any) => (
-                      <Checkbox
-                        key={index}
-                        radius="sm"
-                        color="primary"
-                        className="mb-1"
-                        classNames={{
-                          label: "text-sm",
-                        }}
-                        value={item.uid}
-                        // @ts-ignore
-                        isSelected={checkedState[item.uid] || false}
-                        onChange={() => handleCheck(item.uid)}
-                      >
-                        {item.name}
-                      </Checkbox>
+                    <Checkbox
+                      key={index}
+                      radius="sm"
+                      color="primary"
+                      className="mb-1"
+                      isDisabled
+                      classNames={{
+                        label: "text-sm",
+                      }}
+                      value={item.uid}
+                      // @ts-ignore
+                      isSelected={checkedState[item.uid] || false}
+                      onChange={() => handleCheck(item.uid)}
+                    >
+                      {item.name}
+                    </Checkbox>
                   ))}
                 </div>
               </div>

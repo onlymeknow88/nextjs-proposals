@@ -163,14 +163,14 @@ export const Content = (authToken: any) => {
           </div>
         </div>
       </div> */}
-      <div className="flex flex-col lg:flex-row pr-8 pl-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between gap-5">
+      <div className="flex flex-col lg:flex-row pl-1 pr-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between md:flex-row md:justify-between md:items-center gap-5">
         <BreadCumbCustom
           label="Dashboard"
           dashboardOnly
           iconHome={<HouseIcon />}
         />
       </div>
-      <div className="lg:px-8 pr-8 pl-4 w-full max-w-full h-screen max-h-full">
+      <div className="pl-1 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 pb-8 max-w-[90rem] mx-auto gap-3">
           <div className="gap-5 justify-center w-full">
             <div className="mt-6 gap-6 flex flex-col w-full">

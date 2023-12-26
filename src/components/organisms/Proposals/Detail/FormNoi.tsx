@@ -229,7 +229,7 @@ const FormNoi = (props: any) => {
                     }}
                     classNames={{
                       inputWrapper: "border-1 border-gray-400 h-[40px]",
-                      label: "z-0",
+                      label: "z-0 text-[10px] lg:py-1 py-2",
                     }}
                   />
                 </div>
@@ -250,6 +250,7 @@ const FormNoi = (props: any) => {
                           placeholder="Pilih"
                           variant="bordered"
                           onChange={(event: any) => {
+                            setError(false);
                             return setFormNoi({
                               ...formNoi,
                               purpay_id: event.target.value,
@@ -259,7 +260,7 @@ const FormNoi = (props: any) => {
                           classNames={{
                             trigger: "border-1 border-gray-400 h-[40px]",
                             value: "text-default-700",
-                            label: "z-0 text-[10px] py-2",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         >
                           {purpay.map((item: PurpayTypes) => (
@@ -289,7 +290,7 @@ const FormNoi = (props: any) => {
                           isRequired
                           classNames={{
                             inputWrapper: "h-[40px]",
-                            label: "z-0 text-[10px] !text-black",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         />
                       </div>
@@ -315,7 +316,7 @@ const FormNoi = (props: any) => {
                           classNames={{
                             trigger: "border-1 border-gray-400 h-[40px]",
                             value: "text-default-700",
-                            label: "z-0 text-[10px]",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         >
                           {optGlAcc.map((item: GLAccTypes) => (
@@ -351,7 +352,7 @@ const FormNoi = (props: any) => {
                           classNames={{
                             trigger: "border-1 border-gray-400 h-[40px]",
                             value: "text-default-700",
-                            label: "z-0 text-[10px] py-2",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         >
                           {amount.map((item: any) => (
@@ -372,10 +373,10 @@ const FormNoi = (props: any) => {
                         <label
                           className={`${
                             error === true ? "text-danger-500" : ""
-                          } text-[10px]`}
+                          } z-0 text-[11px] lg:py-1 py-2`}
                         >
                           Due Date
-                          <span className="text-red-500">*</span>
+                          <span className="text-danger-500">*</span>
                         </label>
                         <Datepicker
                           useRange={false}
@@ -415,7 +416,7 @@ const FormNoi = (props: any) => {
                           }}
                           classNames={{
                             inputWrapper: "border-1 border-gray-400 h-[40px]",
-                            label: "z-0",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         />
                       </div>
@@ -444,7 +445,7 @@ const FormNoi = (props: any) => {
                           }}
                           classNames={{
                             inputWrapper: "border-1 border-gray-400 h-[40px]",
-                            label: "z-0",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         />
                       </div>
@@ -472,7 +473,7 @@ const FormNoi = (props: any) => {
                           }}
                           classNames={{
                             inputWrapper: "border-1 border-gray-400 h-[40px]",
-                            label: "z-0",
+                            label: "z-0 text-[10px] lg:py-1 py-2",
                           }}
                         />
                       </div>
@@ -503,7 +504,7 @@ const FormNoi = (props: any) => {
                       }}
                       classNames={{
                         inputWrapper: "border-1 border-gray-400 h-[40px]",
-                        label: "z-0",
+                        label: "z-0 text-[10px] lg:py-1 py-2",
                       }}
                     />
                   </div>
@@ -528,6 +529,7 @@ const FormNoi = (props: any) => {
                       classNames={{
                         inputWrapper: "border-1 border-gray-400",
                         input: "w-[100%] resize-y min-h-[40px]",
+                        label: "z-0 text-[10px] lg:py-1 py-2",
                       }}
                     />
                   </div>
@@ -557,7 +559,7 @@ const FormNoi = (props: any) => {
                     classNames={{
                       inputWrapper: "border-1 border-gray-400",
                       input: "w-[100%] resize-y min-h-[40px]",
-                      label: "z-0",
+                      label: "z-0 text-[10px] lg:py-1 py-2",
                     }}
                   />
                 </div>
@@ -582,7 +584,7 @@ const FormNoi = (props: any) => {
                     classNames={{
                       inputWrapper: "border-1 border-gray-400",
                       input: "w-[100%] resize-y min-h-[40px]",
-                      label: "z-0",
+                      label: "z-0 text-[10px] lg:py-1 py-2",
                     }}
                   />
                 </div>
@@ -610,7 +612,7 @@ const FormNoi = (props: any) => {
                     classNames={{
                       inputWrapper: "border-1 border-gray-400",
                       input: "w-[100%] resize-y min-h-[40px]",
-                      label: "z-0",
+                      label: "z-0 text-[10px] lg:py-1 py-2",
                     }}
                   />
                 </div>

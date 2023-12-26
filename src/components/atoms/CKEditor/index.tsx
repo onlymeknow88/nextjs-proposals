@@ -33,7 +33,7 @@ export const CKEditor = (props: any) => {
       <label
         aria-label="label"
         className={`${
-          error === true ? "text-red-500" : ""
+          error === true ? "text-danger-500" : ""
         } text-sm md:w-[25rem] lg:w-[19.5rem] font-medium`}
       >
         {label}

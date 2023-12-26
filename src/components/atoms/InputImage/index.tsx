@@ -14,11 +14,11 @@ export const InputImage = (props: InputImageProps) => {
     <>
       <span
         className={`${
-          error === true ? "text-red-500" : ""
+          error === true ? "text-danger-500" : ""
         } text-sm md:w-[23.5rem] lg:w-[23.5rem] font-medium`}
       >
         {label}
-        <span className="text-red-500">*</span>
+        <span className="text-danger-500">*</span>
       </span>
       {children}
     </>

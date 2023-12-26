@@ -194,7 +194,7 @@ const FormUseInternal = (props: any) => {
                     } lg:text-[10px] text-sm`}
                   >
                     Due Date
-                    <span className="text-red-500">*</span>
+                    <span className="text-danger-500">*</span>
                   </label>
                   <Datepicker
                     useRange={false}
@@ -254,7 +254,7 @@ const FormUseInternal = (props: any) => {
                     }}
                   >
                     {error && (
-                      <span className="text-tiny text-red-500">
+                      <span className="text-tiny text-danger-500">
                         {validation.ass_proposal}
                       </span>
                     )}

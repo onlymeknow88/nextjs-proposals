@@ -13,11 +13,11 @@ export const Select2 = (props: any) => {
     <>
       <span
         className={`${
-          error === true ? "text-red-500" : ""
+          error === true ? "text-danger-500" : ""
         } text-sm md:w-[25rem] lg:w-[25rem] font-medium`}
       >
         {label}
-        <span className="text-red-500">*</span>
+        <span className="text-danger-500">*</span>
       </span>
       <Autocomplete {...nativeProps}>{children}</Autocomplete>
     </>

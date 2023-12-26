@@ -20,7 +20,7 @@ const CardSisaBudget = (Props: Partial<CardSisaBudgetProps>) => {
           </div>
         </div>
         <div className="flex gap-2.5 py-6 items-center">
-          <span className=" text-2xl font-semibold text-red-500">{formatRupiah(data.sisa_budget || 0)}</span>
+          <span className=" text-2xl font-semibold text-danger-500">{formatRupiah(data.sisa_budget || 0)}</span>
         </div>
         <div className="flex items-center gap-6">
           <div>

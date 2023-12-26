@@ -695,7 +695,7 @@ export const FormProposal = (props: ProposalProps) => {
                   value={proposal.ass_proposal}
                 >
                   {error && (
-                    <span className="text-tiny text-red-500">
+                    <span className="text-tiny text-danger-500">
                       {validation.ass_proposal}
                     </span>
                   )}
@@ -721,7 +721,7 @@ export const FormProposal = (props: ProposalProps) => {
                         </div>
                       </div>
                       {fileError && (
-                        <span className="text-tiny text-red-500">
+                        <span className="text-tiny text-danger-500">
                           {message}
                         </span>
                       )}
@@ -780,7 +780,7 @@ export const FormProposal = (props: ProposalProps) => {
               <div className="flex flex-col lg:w-[550px] md:w-[550px] md:flex-row gap-4">
                 <label
                   className={`${
-                    error === true ? "text-red-500" : ""
+                    error === true ? "text-danger-500" : ""
                   } text-sm md:w-[17rem] lg:w-[15rem] font-medium`}
                 >
                   Kelengkapan Chekclist
