@@ -57,11 +57,13 @@ const EditBudgets = ({tokens, users, budgets}: BudgetsProps) => {
             <BreadCumbCustom
               label="Dashboard"
               labelPage="Budgets"
-              labelDetail="Add Budget"
+              labelDetail="Edit Budget"
               iconHome={<HouseIcon />}
+              isBreadcrumb={true}
+            isBreadcrumbList={true}
             />
           </div>
-          <div className="pl-1 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
+          <div className="pl-0 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
             <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
               <h3 className="text-xl font-semibold"></h3>
     

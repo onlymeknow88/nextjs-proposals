@@ -63,6 +63,7 @@ interface ProposalStateTypes {
   sts_appr_deptHead: any;
   sts_appr_divHead: any;
   sts_appr_director: any;
+  prop_id: string;
 }
 
 interface ProposalProps {
@@ -75,7 +76,7 @@ export const DetailsProposal = (props: ProposalProps) => {
   const { proposalBase64, users, tokens } = props;
 
   const proposals = JSON.parse(atob(proposalBase64.toString()));
-
+  console.log(proposals)
   const [proposal, setProposal] = useState<ProposalStateTypes>({
     emp_name: proposals.emp_name,
     ccow_id: proposals.budget.ccow_id,
@@ -97,6 +98,7 @@ export const DetailsProposal = (props: ProposalProps) => {
     sts_appr_deptHead: proposals.sts_appr_deptHead,
     sts_appr_divHead: proposals.sts_appr_divHead,
     sts_appr_director: proposals.sts_appr_director,
+    prop_id: proposals.prop_id
   });
 
   const router = useRouter();
@@ -122,6 +124,7 @@ export const DetailsProposal = (props: ProposalProps) => {
     sts_appr_deptHead: "",
     sts_appr_divHead: "",
     sts_appr_director: "",
+    prop_id: ""
   });
   const [error, setError] = useState(false);
   const [isLoading, setisLoading] = useState(false);
@@ -344,7 +347,7 @@ export const DetailsProposal = (props: ProposalProps) => {
                   <SelectItem key="other">Other</SelectItem>
                 </SelectComponent>
               </div>
-              <div className="flex flex-col w-[300px] md:w-full lg:w-[550px] md:flex-row gap-4">
+              <div className="flex flex-col w-full md:w-full lg:w-[550px] md:flex-row gap-4">
                 <SelectComponent
                   label="Area"
                   isRequiredLabel="true"
@@ -455,6 +458,7 @@ export const DetailsProposal = (props: ProposalProps) => {
                 <SelectComponent
                   label="Skala Prioritas"
                   isRequiredLabel="true"
+                  radius="sm"
                   isInvalid={error ? true : false}
                   errorMessage={
                     error && validation.skala_prioritas
@@ -521,6 +525,7 @@ export const DetailsProposal = (props: ProposalProps) => {
                   label="Jenis Bantuan"
                   isRequiredLabel="true"
                   variant="flat"
+                  radius="sm"
                   isDisabled
                   isRequired
                   isReadOnly

@@ -245,13 +245,13 @@ const ProposalContent = ({ tokens }: any) => {
   }, [debounceValue, fetchAllProposal, fetchSelect2Area]);
   return (
     <>
-      <div className="flex flex-col lg:flex-row pl-1 pr-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between md:flex-row md:justify-between md:items-center gap-5">
+      <div className="flex flex-col lg:flex-row pl-0 pr-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between md:flex-row md:justify-between md:items-center gap-5">
         <BreadCumbCustom
           label="Dashboard"
           labelPage="Proposal"
-          labelDetail="List"
           iconHome={<HouseIcon />}
-          // iconPage={<FileTextIcons />}
+          isBreadcrumbList={false}
+          isBreadcrumb={true}
         />
         <div className="w-full md:w-[18rem] lg:w-[18rem]">
           <Datepicker
@@ -261,12 +261,12 @@ const ProposalContent = ({ tokens }: any) => {
             //@ts-ignore
             value={value}
             onChange={handleDataRangeChange}
-            inputClassName={`relative transition-all duration-300 py-2.5 pl-4 pr-14 w-full border-default-200 border-1 dark:bg-slate-800 dark:text-white/80 dark:border-slate-600 rounded-xl tracking-wide font-light text-sm placeholder-gray-400 bg-white focus:ring disabled:opacity-60 disabled:cursor-not-allowed focus:border-default-500 focus:ring-white`}
+            inputClassName={`lg:h-[40px] h-[40px] relative transition-all duration-300 py-2.5 pl-4 pr-14 w-full border-default-200 border-1 dark:bg-slate-800 dark:text-white/80 dark:border-slate-600 rounded-xl tracking-wide font-light text-sm placeholder-gray-400 bg-white focus:ring disabled:opacity-60 disabled:cursor-not-allowed focus:border-default-500 focus:ring-white`}
             toggleClassName={`absolute right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-75 disabled:cursor-not-allowed`}
           />
         </div>
       </div>
-      <div className="pl-1 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
+      <div className="pl-0 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold">All Proposal</h3>
           <div className="flex lg:items-center lg:justify-between w-full flex-col lg:flex-row md:flex-row md:items-center gap-4">

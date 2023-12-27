@@ -9,11 +9,25 @@ interface BreadCumbCustomProps {
   labelDetail?: string;
   iconHome: React.ReactNode;
   iconPage?: React.ReactNode;
+  isBreadcrumbList?: boolean;
+  isBreadcrumb?: boolean;
+  hrefChild?: string;
+  hrefChild2?: string;
 }
 
 export const BreadCumbCustom = (props: Partial<BreadCumbCustomProps>) => {
-  const { label, labelPage, labelDetail, iconHome, iconPage, dashboardOnly } =
-    props;
+  const {
+    label,
+    labelPage,
+    labelDetail,
+    iconHome,
+    iconPage,
+    dashboardOnly,
+    isBreadcrumb,
+    isBreadcrumbList,
+    hrefChild,
+    hrefChild2,
+  } = props;
 
   const classDashboard = cx({
     hidden: dashboardOnly,
@@ -33,20 +47,25 @@ export const BreadCumbCustom = (props: Partial<BreadCumbCustomProps>) => {
     >
       <BreadcrumbItem
         href="/"
-        className={`${classDashboard ? "font-bold" : ""} !text-stone-700`}
+        className={`!text-stone-700`}
         startContent={iconHome}
       >
         {label}
       </BreadcrumbItem>
-      <BreadcrumbItem
-        className={`${classDashboard} !text-stone-700`}
-        startContent={iconPage}
-      >
-        {labelPage}
-      </BreadcrumbItem>
-      <BreadcrumbItem className={`font-bold ${classDashboard}`}>
-        {labelDetail}
-      </BreadcrumbItem>
+      {isBreadcrumb && (
+        <BreadcrumbItem
+          href={hrefChild}
+          className={` !text-stone-700`}
+          startContent={iconPage}
+        >
+          {labelPage}
+        </BreadcrumbItem>
+      )}
+      {isBreadcrumbList && (
+        <BreadcrumbItem href={hrefChild2} className={`!text-stone-700`}>
+          {labelDetail}
+        </BreadcrumbItem>
+      )}
     </Breadcrumbs>
   );
 };

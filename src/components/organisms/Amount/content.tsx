@@ -1,17 +1,16 @@
-import { deleteAmount, getAmountAll } from '@/services/amount';
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useDebounce } from 'use-debounce';
-import { SearchIcon } from '../Icons/Table/SearchIcon';
-import { Button, Input, Pagination } from '@nextui-org/react';
-import BreadCumbCustom from '@/components/atoms/Breadcumb';
-import { HouseIcon } from '../Icons/breadcrumb/house-icon';
-import NextLink from 'next/link';
-import NewTable from './NewTable';
+import { deleteAmount, getAmountAll } from "@/services/amount";
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useDebounce } from "use-debounce";
+import { SearchIcon } from "../Icons/Table/SearchIcon";
+import { Button, Input, Pagination } from "@nextui-org/react";
+import BreadCumbCustom from "@/components/atoms/Breadcumb";
+import { HouseIcon } from "../Icons/breadcrumb/house-icon";
+import NextLink from "next/link";
+import NewTable from "./NewTable";
 
 const AmountContent = ({ tokens }: any) => {
-
-    const router = useRouter();
+  const router = useRouter();
   const [isloading, setLoading] = useState(false);
   const [amounts, setAmounts] = useState([]);
   const [page, setPage] = useState(0);
@@ -153,24 +152,25 @@ const AmountContent = ({ tokens }: any) => {
         <BreadCumbCustom
           label="Dashboard"
           labelPage="Amounts"
-          labelDetail="List"
           iconHome={<HouseIcon />}
           // iconPage={<FileTextIcons />}
+          isBreadcrumbList={false}
+          isBreadcrumb={true}
         />
       </div>
       <div className="px-4 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold">All Amount</h3>
           <div className="flex lg:items-center lg:justify-between w-full flex-col lg:flex-row md:flex-row">
-              <Button
-                className="lg:text-sm text-lg h-[50px] lg:h-[34px] text-white md:h-[34px] md:text-sm"  
-                color="primary"
-                radius="sm"
-                as={NextLink}
-                href="/amount/c"
-              >
-                Add
-              </Button>
+            <Button
+              className="lg:text-sm text-lg h-[50px] lg:h-[34px] text-white md:h-[34px] md:text-sm"
+              color="primary"
+              radius="sm"
+              as={NextLink}
+              href="/amount/c"
+            >
+              Add
+            </Button>
           </div>
           <NewTable
             tokens={tokens}
@@ -183,6 +183,6 @@ const AmountContent = ({ tokens }: any) => {
       </div>
     </>
   );
-}
+};
 
-export default AmountContent
+export default AmountContent;

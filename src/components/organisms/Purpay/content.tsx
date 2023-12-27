@@ -152,16 +152,16 @@ const PurpayContent = ({ tokens }: any) => {
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row pl-1 pr-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between md:flex-row md:justify-between md:items-center gap-5">
+      <div className="flex flex-col lg:flex-row pl-0 pr-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between md:flex-row md:justify-between md:items-center gap-5">
         <BreadCumbCustom
           label="Dashboard"
           labelPage="Purpose Payment"
-          labelDetail="List"
           iconHome={<HouseIcon />}
-          // iconPage={<FileTextIcons />}
+          isBreadcrumbList={false}
+          isBreadcrumb={true}
         />
       </div>
-      <div className="pl-1 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
+      <div className="pl-0 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold">All Purpose Payment</h3>
           <div className="flex lg:items-center lg:justify-between w-full md:flex-row flex-col lg:flex-row">

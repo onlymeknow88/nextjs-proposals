@@ -9,10 +9,10 @@ import { ButtonSubmit } from "@/components/molecules/ButtonSubmit";
 import { CcowsTypes, UserTypes } from "@/services/data-types";
 
 interface CcowProps {
-    ccowBase64: CcowsTypes;
-    users: UserTypes;
-    tokens: string;
-  }
+  ccowBase64: CcowsTypes;
+  users: UserTypes;
+  tokens: string;
+}
 
 interface CcowStateTypes {
   ccow_name: string;
@@ -40,7 +40,7 @@ const FormCcow = (props: CcowProps) => {
   const [error, setError] = useState(false);
 
   const handleSubmit = async () => {
-    const res = await updateCcow(ccow,ccows.ccow_id, tokens);
+    const res = await updateCcow(ccow, ccows.ccow_id, tokens);
     switch (res.error) {
       case true:
         setValidation(res.data);
@@ -55,16 +55,16 @@ const FormCcow = (props: CcowProps) => {
   return (
     <>
       <div className="flex justify-between gap-3 items-end">
-          <Button
-            className="text-lg h-[40px] lg:h-[34px] lg:text-sm bg-default-200 md:h-[34px] md:text-sm"
-            size="sm"
-            as={NextLink}
-            href="/ccow"
-            radius="sm"
-            startContent={<ArrowLeft className="h-6 stroke-default-500" />}
-          >
-            Back
-          </Button>
+        <Button
+          className="text-lg h-[40px] lg:h-[34px] lg:text-sm bg-default-200 md:h-[34px] md:text-sm"
+          size="sm"
+          as={NextLink}
+          href="/ccow"
+          radius="sm"
+          startContent={<ArrowLeft className="h-6 stroke-default-500" />}
+        >
+          Back
+        </Button>
       </div>
 
       <div className="max-w-[90rem]">

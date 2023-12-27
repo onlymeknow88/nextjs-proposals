@@ -49,10 +49,13 @@ interface FormNoiStateTypes {
   desc: string;
   explanation: string;
   amount_id: string;
+  prop_id:string;
 }
 
 const FormNoi = (props: any) => {
   const { proposals, tokens } = props;
+
+  
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const initialState = {
@@ -69,6 +72,7 @@ const FormNoi = (props: any) => {
     desc: "",
     explanation: "",
     amount_id: "",
+    prop_id: proposals.prop_id,
   };
 
   const [formNoi, setFormNoi] = useState<FormNoiStateTypes>(initialState);
@@ -79,18 +83,18 @@ const FormNoi = (props: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
   //date range
-  const [value, setValue] = useState({
+  const [date, setDate] = useState({
     startDate: null,
     endDate: null,
   });
 
   //@ts-ignore
-  const handleDate = (newValue) => {
-    setValue(newValue);
+  const handleDate = (newDate) => {
+    setDate(newDate);
 
     setFormNoi({
       ...formNoi,
-      due_date: newValue.startDate,
+      due_date: newDate.startDate,
     });
   };
 
@@ -136,7 +140,7 @@ const FormNoi = (props: any) => {
     [tokens, formNoi, amount]
   );
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     const data = new FormData();
     data.append("nop_name", formNoi.nop_name);
     data.append("purpay_id", formNoi.purpay_id);
@@ -151,7 +155,7 @@ const FormNoi = (props: any) => {
     data.append("other_info", formNoi.other_info);
     data.append("desc", formNoi.desc);
     data.append("explanation", formNoi.explanation);
-    data.append("nope_name", formNoi.nop_name);
+    data.append("prop_id", formNoi.prop_id);
 
     const res = await storeFormNop(data, tokens);
 
@@ -167,7 +171,7 @@ const FormNoi = (props: any) => {
       default:
         break;
     }
-  }, [formNoi, proposals, tokens, onClose]);
+  };
 
   useEffect(() => {
     fetchSelect2GlAcc();
@@ -406,6 +410,7 @@ const FormNoi = (props: any) => {
                           size="sm"
                           placeholder=" "
                           variant="bordered"
+                          
                           // value={proposal.nama}
                           isRequired
                           onChange={(event: any) => {
@@ -435,6 +440,7 @@ const FormNoi = (props: any) => {
                           labelPlacement="outside"
                           variant="bordered"
                           placeholder=" "
+                          description="mohon dipastikan namanya sesuai dengan buku tabungan / rekening penerima. Penerima pribadi harap melampirkan ID/KTP dan PNS"
                           isRequired
                           onChange={(event: any) => {
                             setError(false);

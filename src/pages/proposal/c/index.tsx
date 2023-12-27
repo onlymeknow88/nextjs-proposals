@@ -56,20 +56,13 @@ export const CreateProposals = ({ tokens }: ProposalProps) => {
           labelPage="Proposal"
           labelDetail="Form Pengajuan"
           iconHome={<HouseIcon />}
-          // iconPage={<FileTextIcons />}
+          hrefChild='/proposal'
+          isBreadcrumb={true}
+          isBreadcrumbList={true}
+
         />
-        {/* <div className="w-[18rem] lg:w-[18rem]">
-          <Datepicker
-            placeholder={"Date Range"}
-            //@ts-ignore
-            value={value}
-            onChange={handleDataRangeChange}
-            inputClassName={`relative transition-all duration-300 py-2.5 pl-4 pr-14 w-full border-default-500 border-1 dark:bg-slate-800 dark:text-white/80 dark:border-slate-600 rounded-xl tracking-wide font-light text-sm placeholder-gray-400 bg-white focus:ring disabled:opacity-60 disabled:cursor-not-allowed focus:border-default-500 focus:ring-white`}
-            toggleClassName={`absolute right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-75 disabled:cursor-not-allowed`}
-          />
-        </div> */}
       </div>
-      <div className="pl-1 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
+      <div className="pl-0 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold">Pengajuan Proposal</h3>
 

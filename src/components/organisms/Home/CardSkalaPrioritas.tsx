@@ -13,7 +13,7 @@ const CardSkalaPrioritas = (Props: CardSkalaPrioritasProps) => {
     <Card className={`xl:max-w-sm w-full lg:h-[9.4rem] h-[9.8rem]
     ${data.name === "High" ? "bg-gradient-to-l from-pink-500 to-rose-600" : ""}
     ${data.name === "Medium" ? "bg-gradient-to-l from-amber-500 to-amber-600" : ""}
-    ${data.name === "Low" ? "bg-gradient-to-l from-green-500 to-green-600" : ""}
+    ${data.name === "Low" ? "bg-gradient-to-l from-blue-500 to-blue-600" : ""}
      rounded-xl shadow-md px-3`}>
       <CardBody className="py-5 lg:py-5">
         <div className="flex">

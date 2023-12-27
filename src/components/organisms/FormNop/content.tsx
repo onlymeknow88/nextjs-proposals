@@ -31,8 +31,6 @@ const FormNopContent = ({tokens,users}: any) => {
     const res = await getFormNopAll(limit, page, debounceValue, tokens);
     const data = await res.data.result;
 
-    console.log(data);
-
     setPage(data.current_page);
     setPages(data.total);
     setRows(data.per_page);
@@ -156,10 +154,10 @@ const FormNopContent = ({tokens,users}: any) => {
       <div className="flex flex-col lg:flex-row px-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between gap-5">
         <BreadCumbCustom
           label="Dashboard"
-          labelPage="NON ORDER PAYMENT"
-          labelDetail="List"
+          labelPage="Non Order Payment"
           iconHome={<HouseIcon />}
-          // iconPage={<FileTextIcons />}
+          isBreadcrumbList={false}
+          isBreadcrumb={true}
         />
       </div>
       <div className="px-4 lg:px-8 w-full max-w-full h-screen max-h-full">
