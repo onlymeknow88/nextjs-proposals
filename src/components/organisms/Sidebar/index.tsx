@@ -80,8 +80,8 @@ export const SidebarWrapper = () => {
             <LargeSidebarItem
               isActive={
                 router.pathname === "/proposal" ||
-                router.pathname === "/proposal/pengajuan" ||
-                router.pathname === "/proposal/pengajuan/e/[id]" ||
+                router.pathname === "/proposal/c" ||
+                router.pathname === "/proposal/e/[id]" ||
                 router.pathname === "/proposal/d/[id]"
               }
               title="Proposal"

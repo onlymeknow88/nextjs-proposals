@@ -5,7 +5,6 @@ import { Navbar } from "../Navbar";
 import { SidebarWrapper } from "../Sidebar";
 import { NextApiRequest } from "next";
 
-
 interface Props {
   children: React.ReactNode;
 }

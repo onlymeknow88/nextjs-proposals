@@ -39,6 +39,8 @@ import { getSelect2Ccow } from "@/services/ccow";
 import { AreasTypes, BudgetsTypes, CcowsTypes } from "@/services/data-types";
 import { getSelect2Area } from "@/services/area";
 import { getSelect2Budget } from "@/services/budget";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 interface ProposalStateTypes {
   emp_name: string;
@@ -102,6 +104,10 @@ export const FormProposal = (props: ProposalProps) => {
   const [validation, setValidation] =
     useState<ProposalStateTypes>(initialState);
   const [error, setError] = useState(false);
+  const [fileError, setFileError] = useState(false);
+
+   //sweetalert toast
+   const MySwal = withReactContent(Swal);
 
   const handleInputValueJmlDana = (ctx: any) => {
     if (ctx.key === "dana") {
@@ -215,11 +221,39 @@ export const FormProposal = (props: ProposalProps) => {
 
       const response = await UploadFile(formData);
       if (response.error) {
-        // toast.error(response.message);
+        MySwal.fire({
+          toast: true,
+          icon: "error",
+          title: "File Failed to Upload",
+          animation: true,
+          position: "top-right",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+        setMessage(response.message);
+        setFileError(true);
         setLoading(false);
-        return;
       } else {
-        // toast.success("File Uploaded");
+        MySwal.fire({
+          toast: true,
+          icon: "success",
+          title: "File Uploaded",
+          animation: true,
+          position: "top-right",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+        setFileError(false);
       }
 
       setProposal({
@@ -229,7 +263,7 @@ export const FormProposal = (props: ProposalProps) => {
 
       setLoading(false);
     },
-    [proposal]
+    [proposal, MySwal]
   );
   //validate file
   const fileValidate = (file: any) => {
@@ -310,7 +344,7 @@ export const FormProposal = (props: ProposalProps) => {
           Back
         </Button>
       </div>
-      <div className="max-w-[90rem]">
+      <div className="max-w-[90rem] mb-10">
         <form action="">
           <Card shadow="sm" className="max-w-[90rem] lg:w-full">
             <CardBody className="p-4 md:p-6 lg:p-8 gap-4">

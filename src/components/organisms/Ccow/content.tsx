@@ -2,13 +2,15 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useDebounce } from "use-debounce";
-import { Button, Input, Pagination } from "@nextui-org/react";
+import { Button, Input, Pagination, PaginationItemType } from "@nextui-org/react";
 import { SearchIcon } from "../Icons/Table/SearchIcon";
 import { deleteCcow, getCcowAll } from "@/services/ccow";
 import BreadCumbCustom from "@/components/atoms/Breadcumb";
 import { HouseIcon } from "../Icons/breadcrumb/house-icon";
 import NextLink from "next/link";
 import NewTable from "./NewTable";
+import { ChevronIcon } from "../Icons/Button/ChevronIcon";
+import cn from "classnames";
 
 const CcowContent = ({ tokens }: any) => {
   const router = useRouter();
@@ -121,31 +123,92 @@ const CcowContent = ({ tokens }: any) => {
     );
   }, [onRowsPerPageChange, onSearchChange, keyword]);
 
+  //pagination custom button
+  const renderItem = ({
+    ref,
+    key,
+    value,
+    isActive,
+    onNext,
+    onPrevious,
+    setPage,
+    className,
+  }: any) => {
+    if (value === PaginationItemType.NEXT) {
+      return (
+        <button
+          key={key}
+          className={cn(className, "!bg-default-200/50 min-w-8 w-8 h-8")}
+          onClick={onNext}
+        >
+          <ChevronIcon className="rotate-180" />
+        </button>
+      );
+    }
+
+    if (value === PaginationItemType.PREV) {
+      return (
+        <button
+          key={key}
+          className={cn(className, "!bg-default-200/50 min-w-8 w-8 h-8")}
+          onClick={onPrevious}
+        >
+          <ChevronIcon />
+        </button>
+      );
+    }
+
+    if (value === PaginationItemType.DOTS) {
+      return (
+        <button key={key} className={className}>
+          ...
+        </button>
+      );
+    }
+
+    // cursor is the default item
+    return (
+      <button
+        key={key}
+        ref={ref}
+        className={cn(
+          className,
+          isActive && " !bg-green-200/50 !border-2 !border-green-500 font-bold"
+        )}
+        onClick={() => setPage(value)}
+      >
+        {value}
+      </button>
+    );
+  };
+
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
+      <div className="py-2 px-2 flex justify-between items-center lg:mb-10">
         <span className="text-default-700 text-small">
           Showing {page} to {rows} of {pages} Entries
         </span>
         <Pagination
-          isCompact
+          // isCompact
+          disableCursorAnimation
           showControls
-          showShadow
           color="primary"
-          size="md"
-          className="text-white"
-          //   isDisabled={hasSearchFilter}
+          radius="sm"
+          className="gap-2"
           page={page}
           total={lastPage}
           variant="light"
-          onChange={setPage}
-          classNames={{
-            wrapper: "flex items-center gap-2 bg-white shadow-md",
+          onChange={(page)=> {
+            // setIsLoading(true)
+            setPage(page)
           }}
+          renderItem={renderItem}
         />
       </div>
     );
   }, [page, pages, rows, lastPage]);
+
+  
   return (
     <>
       <div className="flex flex-col lg:flex-row pl-0 pr-4 lg:px-8 py-8 lg:items-center w-full lg:justify-between md:flex-row md:justify-between md:items-center gap-5">

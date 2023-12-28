@@ -4,6 +4,7 @@ import {
   Button,
   Chip,
   Link,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -104,12 +105,16 @@ const NewTable = (props: any) => {
 
   return (
     <Table
+    aria-label="Example table with client side sorting"
       bottomContent={bottomContents}
       topContent={topContents}
       topContentPlacement="outside"
       bottomContentPlacement="outside"
       isStriped
       isCompact
+      classNames={{
+        table: "min-h-[200px]",
+      }}
     >
       <TableHeader columns={columns}>
         {(column) => (
@@ -129,9 +134,9 @@ const NewTable = (props: any) => {
         )}
       </TableHeader>
       <TableBody
-        emptyContent={"No data found"}
-        isLoading={isloading}
         items={proposals}
+        isLoading={isloading}
+        loadingContent={<Spinner label="Loading..." />}
       >
         {(item: ProposalTypes) => (
           <TableRow key={item.prop_id}>

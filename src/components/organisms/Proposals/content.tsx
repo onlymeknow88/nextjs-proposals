@@ -7,6 +7,7 @@ import {
   Button,
   Input,
   Pagination,
+  PaginationItemType,
   Select,
   SelectItem,
 } from "@nextui-org/react";
@@ -29,10 +30,12 @@ import NewTable from "./NewTable";
 import NextLink from "next/link";
 import { getSelect2Area } from "@/services/area";
 import { AreasTypes } from "@/services/data-types";
+import cn from "classnames";
+import { ChevronIcon } from "../Icons/Button/ChevronIcon";
 
 const ProposalContent = ({ tokens }: any) => {
   const router = useRouter();
-  const [isloading, setLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
   const [proposals, setProposals] = useState([]);
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(10);
@@ -46,7 +49,7 @@ const ProposalContent = ({ tokens }: any) => {
   const [debounceValue] = useDebounce(keyword, 1000);
 
   const fetchAllProposal = useCallback(async () => {
-    setLoading(true);
+    setIsLoading(true);
 
     const res = await getProposalAll(limit, page, debounceValue, tokens);
     const data = await res.data.result;
@@ -57,28 +60,35 @@ const ProposalContent = ({ tokens }: any) => {
     setLastPage(data.last_page);
 
     setProposals(data.data);
-    setLoading(false);
+    // setIsLoading(false);
   }, [page, limit, debounceValue, tokens]);
 
   const fetchSelect2Area = useCallback(async () => {
+    setIsLoading(true);
     const res = await getSelect2Area(tokens);
     const data = await res.data.result;
     setOptArea(data);
+
+    setIsLoading(false);
   }, [tokens]);
 
   //search
   const onSearchChange = useCallback(async (value: string) => {
+    // setIsLoading(true)
     if (value) {
       setKeyword(value);
       setPage(1);
     } else {
       setKeyword("");
     }
+    // setIsLoading(false);
   }, []);
 
   const onRowsPerPageChange = useCallback((e: any) => {
+    // setIsLoading(true)
     setLimit(Number(e.target.value));
     setPage(0);
+    // setIsLoading(false);
   }, []);
 
   //refresh data
@@ -118,7 +128,7 @@ const ProposalContent = ({ tokens }: any) => {
     setLastPage(data.last_page);
     setProposals(data.data);
   }, []);
-  
+
   //status change
   const onSkalaPrioritasChange = useCallback(async (value: string) => {
     const response = await getProposal(value, "skala_prioritas");
@@ -194,7 +204,7 @@ const ProposalContent = ({ tokens }: any) => {
             <Input
               isClearable
               className=" lg:w-auto ml-8 z-0"
-              placeholder="..."
+              placeholder="search"
               startContent={<SearchIcon />}
               labelPlacement="outside-left"
               label="Search :"
@@ -212,32 +222,90 @@ const ProposalContent = ({ tokens }: any) => {
     );
   }, [onRowsPerPageChange, onSearchChange, keyword]);
 
+  //pagination custom button
+  const renderItem = ({
+    ref,
+    key,
+    value,
+    isActive,
+    onNext,
+    onPrevious,
+    setPage,
+    className,
+  }: any) => {
+    if (value === PaginationItemType.NEXT) {
+      return (
+        <button
+          key={key}
+          className={cn(className, "!bg-default-200/50 min-w-8 w-8 h-8")}
+          onClick={onNext}
+        >
+          <ChevronIcon className="rotate-180" />
+        </button>
+      );
+    }
+
+    if (value === PaginationItemType.PREV) {
+      return (
+        <button
+          key={key}
+          className={cn(className, "!bg-default-200/50 min-w-8 w-8 h-8")}
+          onClick={onPrevious}
+        >
+          <ChevronIcon />
+        </button>
+      );
+    }
+
+    if (value === PaginationItemType.DOTS) {
+      return (
+        <button key={key} className={className}>
+          ...
+        </button>
+      );
+    }
+
+    // cursor is the default item
+    return (
+      <button
+        key={key}
+        ref={ref}
+        className={cn(
+          className,
+          isActive && " !bg-green-200/50 !border-2 !border-green-500 font-bold"
+        )}
+        onClick={() => setPage(value)}
+      >
+        {value}
+      </button>
+    );
+  };
+
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
+      <div className="py-2 px-2 flex justify-between items-center lg:mb-10">
         <span className="text-default-700 text-small">
           Showing {page} to {rows} of {pages} Entries
         </span>
         <Pagination
-          isCompact
+          // isCompact
+          disableCursorAnimation
           showControls
-          showShadow
           color="primary"
-          size="md"
-          className="text-white"
+          radius="sm"
+          className="gap-2"
           page={page}
           total={lastPage}
           variant="light"
-          onChange={setPage}
-          classNames={{
-            wrapper: "flex items-center gap-2 bg-white shadow-md",
+          onChange={(page)=> {
+            // setIsLoading(true)
+            setPage(page)
           }}
+          renderItem={renderItem}
         />
       </div>
     );
   }, [page, pages, rows, lastPage]);
-
-  
 
   useEffect(() => {
     fetchAllProposal();
@@ -266,7 +334,7 @@ const ProposalContent = ({ tokens }: any) => {
           />
         </div>
       </div>
-      <div className="pl-0 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full">
+      <div className="pl-0 pr-4 lg:px-8 w-full max-w-full h-screen max-h-full ">
         <div className="flex flex-col justify-center w-full lg:px-0 max-w-[90rem] mx-auto gap-3">
           <h3 className="text-xl font-semibold">All Proposal</h3>
           <div className="flex lg:items-center lg:justify-between w-full flex-col lg:flex-row md:flex-row md:items-center gap-4">
@@ -343,13 +411,16 @@ const ProposalContent = ({ tokens }: any) => {
                     {item.area_name}
                   </SelectItem>
                 ))}
-                <SelectItem key="0" value="0">Other</SelectItem>
+                <SelectItem key="0" value="0">
+                  Other
+                </SelectItem>
               </Select>
             </div>
           </div>
 
           <NewTable
             onDeleteModal={handleDelete}
+            isloading={isloading}
             proposals={proposals}
             topContents={topContent}
             bottomContents={bottomContent}
